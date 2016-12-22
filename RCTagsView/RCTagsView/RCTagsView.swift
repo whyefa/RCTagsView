@@ -9,7 +9,7 @@
 
 import UIKit
 
-enum RCTagsViewTextFieldAlign: Int { // align is relative to a last tag
+public enum RCTagsViewTextFieldAlign: Int { // align is relative to a last tag
     case top
     case center
     case bottom
@@ -17,7 +17,7 @@ enum RCTagsViewTextFieldAlign: Int { // align is relative to a last tag
 
 var RCTagsViewAutomaticDimension: CGFloat = -0.0001 // use sizeToFit
 
-@objc protocol RCTagsViewDelegate: NSObjectProtocol {
+@objc public protocol RCTagsViewDelegate: NSObjectProtocol {
     @objc optional func tagsView(tagsView: RCTagsView, buttonForTagAt index: Int) -> UIButton //used default tag button if not implemented 
     @objc optional func  tagsView(tagsView: RCTagsView, shouldAddTag text: String) -> Bool // called when 'space' key pressed. return false to ignore tag
 
@@ -35,7 +35,7 @@ var RCTagsViewAutomaticDimension: CGFloat = -0.0001 // use sizeToFit
 
 
 
-class RCTagsView: UIView {
+public class RCTagsView: UIView {
 
     // MARK: - const
     let default_button_tag = -9999
@@ -152,7 +152,7 @@ class RCTagsView: UIView {
 
     fileprivate var needScrollToBottomAfterLayout: Bool = true
 
-    override var tintColor: UIColor! {
+    override public var tintColor: UIColor! {
         didSet {
             inputTextField.tintColor = tintColor
             for button in mutableTagButtons {
@@ -299,7 +299,7 @@ class RCTagsView: UIView {
         setup()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -329,7 +329,7 @@ class RCTagsView: UIView {
         textFieldHeight = RCTagsViewAutomaticDimension
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         var contentWidth: CGFloat = bounds.width - scrollView.contentInset.left - scrollView.contentInset.right
         var lowerFrame:CGRect = .zero
@@ -437,7 +437,7 @@ class RCTagsView: UIView {
     }
 
     
-    override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         get {
             return contentSize
         }
