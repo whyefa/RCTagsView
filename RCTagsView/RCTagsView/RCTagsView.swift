@@ -46,9 +46,9 @@ public class RCTagsView: UIView {
 
     // MARK: - public property
     // delegate 
-    var delegate: RCTagsViewDelegate?
+    public var delegate: RCTagsViewDelegate?
 
-    var font: UIFont = UIFont.systemFont(ofSize: 15) {
+    public var font: UIFont = UIFont.systemFont(ofSize: 15) {
         didSet {
             inputTextField.font = font
             for button in mutableTagButtons {
@@ -61,7 +61,7 @@ public class RCTagsView: UIView {
         }
     }// default is font as flowing
 
-    var isEditable: Bool = true {
+    public var isEditable: Bool = true {
         didSet {
             if isEditable {
                 inputTextField.isHidden = false
@@ -77,63 +77,63 @@ public class RCTagsView: UIView {
     }// default is true
 
 
-    var isSelectable: Bool = true {
+    public var isSelectable: Bool = true {
         didSet {
             setNeedsLayout()
         }
     }// default is true
 
-    var isMultipleSelectable: Bool = true {
+    public var isMultipleSelectable: Bool = true {
         didSet {
             setNeedsLayout()
         }
     }// default is true
 
-    var selectBeforeRemoveOnDeleteBackward: Bool = true // default is true
+    public var selectBeforeRemoveOnDeleteBackward: Bool = true // default is true
 
-    var deselectAllOnEditing: Bool = true // default is true
+    public var deselectAllOnEditing: Bool = true // default is true
 
-    var deslectAllOnEndEditing: Bool = true // default is true
+    public var deslectAllOnEndEditing: Bool = true // default is true
 
-    var isScrollsHorizontally: Bool = false {
+    public var isScrollsHorizontally: Bool = false {
         didSet {
             setNeedsLayout()
         }
     }// default is false
 
-    var lineSpacing: CGFloat = 2 {
+    public var lineSpacing: CGFloat = 2 {
         didSet {
             setNeedsLayout()
         }
     }// default is 2
 
-    var interitemSpacing: CGFloat = 4 {
+    public var interitemSpacing: CGFloat = 4 {
         didSet {
             setNeedsLayout()
         }
     }// default is 2
 
-    var tagButtonHeight: CGFloat! {
+    public var tagButtonHeight: CGFloat! {
         didSet {
             setNeedsLayout()
         }
     }// default is auto
 
-    var textFieldHeight: CGFloat! {
+    public var textFieldHeight: CGFloat! {
         didSet {
             setNeedsLayout()
         }
     }// default is auto
 
-    var textFieldAlign: RCTagsViewTextFieldAlign = .center {
+    public var textFieldAlign: RCTagsViewTextFieldAlign = .center {
         didSet {
             setNeedsLayout()
         }
     }// default is center
 
-    var deliminater: CharacterSet = CharacterSet.whitespaces // defailt is whitespaceCharacterSet
+    public var deliminater: CharacterSet = CharacterSet.whitespaces // defailt is whitespaceCharacterSet
 
-    var textField: UITextField {
+    public var textField: UITextField {
         get {
             return inputTextField
         }
@@ -170,7 +170,7 @@ public class RCTagsView: UIView {
 
 
     // MARK: - public methods
-    func indexForTag(atScrollView point: CGPoint) -> Int {
+    public func indexForTag(atScrollView point: CGPoint) -> Int {
         for index in 0..<mutableTagButtons.count {
             if mutableTagButtons[index].frame.contains(point) {
                 return index
@@ -179,14 +179,14 @@ public class RCTagsView: UIView {
         return NSNotFound
     }
 
-    func buttonForTag(at index: Int) -> UIButton? {
+    public func buttonForTag(at index: Int) -> UIButton? {
         if index >= 0 && index < mutableTagButtons.count {
             return mutableTagButtons[index]
         }
         return nil
     }
 
-    func reloadButtons() {
+    public func reloadButtons() {
         let allTags = tags
         removeAllTags()
         for tag in allTags {
@@ -194,11 +194,11 @@ public class RCTagsView: UIView {
         }
     }
 
-    func  addTag(title: String) {
+    public func  addTag(title: String) {
         insertTag(title: title, at: mutableTags.count)
     }
 
-    func insertTag(title: String, at index: Int) {
+    public func insertTag(title: String, at index: Int) {
         if index >= 0 && index <= mutableTags.count {
             mutableTags.insert(title, at: index)
             var tagButton: UIButton
@@ -228,7 +228,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func moveTag(from index: Int, toIndex: Int) {
+    public func moveTag(from index: Int, toIndex: Int) {
         if index >= 0 && index <= mutableTags.count && toIndex >= 0 && toIndex <= mutableTags.count && index != toIndex {
             let tag = mutableTags[index]
             let button = mutableTagButtons[index]
@@ -241,7 +241,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func removeTag(at index: Int) {
+    public func removeTag(at index: Int) {
         if index >= 0 && index < mutableTags.count {
             mutableTags.remove(at: index)
             mutableTagButtons[index].removeFromSuperview()
@@ -250,7 +250,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func removeAllTags() {
+    public func removeAllTags() {
         mutableTags.removeAll()
         for button in mutableTagButtons {
             button.removeFromSuperview()
@@ -259,7 +259,7 @@ public class RCTagsView: UIView {
         setNeedsLayout()
     }
 
-    func selectTag(at index: Int) {
+    public func selectTag(at index: Int) {
         if index >= 0 && index < mutableTagButtons.count {
             if !isMultipleSelectable {
                 deselectAll()
@@ -271,7 +271,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func deselectTag(at index: Int) {
+    public func deselectTag(at index: Int) {
         if index >= 0 && index < mutableTagButtons.count {
             mutableTagButtons[index].isSelected = false
             if mutableTagButtons[index].tag == default_button_tag {
@@ -280,13 +280,13 @@ public class RCTagsView: UIView {
         }
     }
 
-    func selectAll() {
+    public func selectAll() {
         for index in 0..<mutableTagButtons.count {
             selectTag(at: index)
         }
     }
 
-    func deselectAll() {
+    public func deselectAll() {
         for index in 0..<mutableTagButtons.count {
             deselectTag(at: index)
         }
@@ -294,7 +294,7 @@ public class RCTagsView: UIView {
 
 
     // MARK: - init 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
@@ -305,7 +305,7 @@ public class RCTagsView: UIView {
     }
 
 
-    func setup() {
+    private func setup() {
         scrollView = UIScrollView(frame: self.bounds)
         scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.backgroundColor = nil
@@ -463,7 +463,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    var contentSize: CGSize {
+    private var contentSize: CGSize {
         get {
             return CGSize(width: isScrollsHorizontally ? (scrollView.contentSize.width + scrollView.contentInset.left + scrollView.contentInset.right) : bounds.width, height: scrollView.contentSize.height + scrollView.contentInset.top + scrollView.contentInset.bottom)
         }
@@ -471,7 +471,7 @@ public class RCTagsView: UIView {
 
     // MARK: - handlers 
 
-    func inputTextFieldChanged() {
+    @objc private func inputTextFieldChanged() {
         if deselectAllOnEditing {
             deselectAll()
         }
@@ -510,11 +510,11 @@ public class RCTagsView: UIView {
         })
     }
 
-    func inputTestFieldEditingDidBegin() {
+    @objc private func inputTestFieldEditingDidBegin() {
         becomeFirstResponderButton.isHidden = true
     }
 
-    func intputTextFieldEditingDidEnd() {
+    @objc private func intputTextFieldEditingDidEnd() {
         if inputTextField.text!.characters.count > 0 {
             inputTextField.text = inputTextField.text! + "  "
             inputTextFieldChanged()
@@ -570,7 +570,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func tapped(button: UIButton) {
+    @objc private func tapped(button: UIButton) {
         if isSelectable {
             let buttonIndex: Int! = mutableTagButtons.index(of: button)
             if button.isSelected {
@@ -590,7 +590,7 @@ public class RCTagsView: UIView {
     }
 
     // MARK: - internal helpers
-    func originalFrame(view: UIView) -> CGRect{
+    private func originalFrame(view: UIView) -> CGRect{
         if CGAffineTransform.identity == view.transform {
             return view.frame
         } else {
@@ -602,7 +602,7 @@ public class RCTagsView: UIView {
         }
     }
 
-    func setView(_ view: UIView, originalFrame: CGRect) {
+    private func setView(_ view: UIView, originalFrame: CGRect) {
         if CGAffineTransform.identity == view.transform {
             view.frame = originalFrame
         } else {
@@ -619,7 +619,6 @@ public class RCTagsView: UIView {
 //MARK: - RCInputTextField
 class RCInputTextField: UITextField {
     var tagsView: RCTagsView?
-
     override func deleteBackward() {
         if self.tagsView!.shouldInputTextDeleteBackward() {
             super.deleteBackward()
